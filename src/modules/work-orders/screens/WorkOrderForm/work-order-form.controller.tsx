@@ -15,14 +15,14 @@ export const WorkOrderForm: React.FC = () => {
   const orders = useStore((s) => s.orders);
   const createOrder = useStore((s) => s.createOrder);
   const updateOrder = useStore((s) => s.updateOrder);
-  
+
   const existing = id ? orders.find((o: { id: string; }) => o.id === id) : null;
 
   const [form, setForm] = useState<WorkOrderFormData>({
-    title:       existing?.title       ?? "",
+    title: existing?.title ?? "",
     description: existing?.description ?? "",
-    status:      existing?.status      ?? "Pending",
-    assignedTo:  existing?.assignedTo  ?? "",
+    status: existing?.status ?? "Pending",
+    assignedTo: existing?.assignedTo ?? "",
   });
   const [errors, setErrors] = useState<Errors>({});
   const [saving, setSaving] = useState(false);
@@ -38,10 +38,10 @@ export const WorkOrderForm: React.FC = () => {
   };
 
   const handleSave = async () => {
-    const errors = validateForm(form);
-    if (Object.keys(errors).length) { 
-      setErrors(errors); 
-      return; 
+    const error = validateForm(form);
+    if (Object.keys(error).length) {
+      setErrors(error);
+      return;
     }
     setSaving(true);
     try {

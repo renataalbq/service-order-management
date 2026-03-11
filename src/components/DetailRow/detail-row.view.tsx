@@ -1,0 +1,20 @@
+import React from "react";
+import { IProps } from "./detail-row.types";
+import { View, Text } from "react-native";
+import { useStyles } from "./detail-row.styles";
+
+export const DetailRowView: React.FC<IProps> = (props) => {
+  const { iconName, value, label } = props;
+  const styles = useStyles();
+
+  return (
+    <View style={styles.row}>
+      <Text style={styles.icon}>{iconName}</Text>
+
+      <View style={styles.content}>
+        <Text style={styles.label}>{label}</Text>
+        <Text style={styles.value}>{value}</Text>
+      </View>
+    </View>
+  );
+};
