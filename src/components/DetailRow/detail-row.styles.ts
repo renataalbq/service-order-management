@@ -13,7 +13,7 @@ export const useStyles = () => {
     icon: {
       fontSize: 18,
       width: 26,
-      textAlign: "center" as const
+      textAlign: "center"
     },
 
     content: {

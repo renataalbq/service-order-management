@@ -1,5 +1,5 @@
-import { WorkOrderStatus } from "../../../modules/work-orders";
 import { colors } from "../../../theme";
+import { WorkOrderStatus } from "../../../types";
 
 export const STATUS: WorkOrderStatus[] = ["Pending", "In Progress", "Completed"];
 

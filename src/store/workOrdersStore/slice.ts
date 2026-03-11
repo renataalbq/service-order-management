@@ -1,14 +1,12 @@
 import { StateCreator } from "zustand";
 import { v4 as uuidv4 } from "uuid";
-import * as repository from "../../repository";
+import * as repository from "../../repository/work-orders";
 import { WorkOrder } from "../../types";
 import { WorkOrdersSlice } from "./types";
 
 const now = () => new Date().toISOString();
 
-export const createWorkOrdersSlice: StateCreator<
-  WorkOrdersSlice
-> = (set) => ({
+export const createWorkOrdersSlice: StateCreator<WorkOrdersSlice> = (set) => ({
   orders: [],
   isLoading: false,
 
@@ -27,36 +25,37 @@ export const createWorkOrdersSlice: StateCreator<
       createdAt: now(),
       updatedAt: now(),
     };
-
     repository.createWorkOrder(order);
 
     set((state) => ({
-      orders: [...state.orders, order],
+      orders: [
+        ...state.orders,
+        { ...order, localOnly: true, needsSync: true } as WorkOrder,
+      ],
     }));
   },
 
   updateOrder: (id, data) => {
     repository.updateWorkOrder(id, data);
-
     set((state) => ({
-      orders: state.orders.map((o) =>
-        o.id === id
+      orders: state.orders.map((order) =>
+        order.id === id
           ? {
-            ...o,
-            ...data,
-            completed: (data.status ?? o.status) === "Completed",
-            updatedAt: now(),
-          }
-          : o
+              ...order,
+              ...data,
+              completed: (data.status ?? order.status) === "Completed",
+              updatedAt: now(),
+              needsSync: true,
+            }
+          : order
       ),
     }));
   },
 
   deleteOrder: (id) => {
     repository.deleteWorkOrder(id);
-
     set((state) => ({
-      orders: state.orders.filter((o) => o.id !== id),
+      orders: state.orders.filter((order) => order.id !== id),
     }));
   },
 });

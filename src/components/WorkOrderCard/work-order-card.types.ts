@@ -1,4 +1,4 @@
-import { WorkOrder } from "../../modules/work-orders";
+import { WorkOrder } from "../../types";
 
 export type IProps = {
   item: WorkOrder;

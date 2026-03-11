@@ -1,8 +1,8 @@
-import { WorkOrderStatus } from "../../modules/work-orders";
+import { WorkOrderStatus } from "../../types";
 
 export type IProps = {
   status: WorkOrderStatus;
-  config: {
+  config?: {
     label: string;
     color: string;
     bg: string;

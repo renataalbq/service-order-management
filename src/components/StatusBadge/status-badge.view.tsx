@@ -9,9 +9,9 @@ export const StatusBadgeView: React.FC<IProps> = (props) => {
   const styles = useStyles();
 
   return (
-    <View style={[styles.badge, { backgroundColor: config.bg }, size === "sm" && styles.sm]}>
-      <View style={[styles.dot, { backgroundColor: config.color }]} />
-      <Text style={[styles.label, { color: config.color }]}>{config.label}</Text>
+    <View style={[styles.badge, { backgroundColor: config?.bg }, size === "sm" && styles.sm]}>
+      <View style={[styles.dot, { backgroundColor: config?.color }]} />
+      <Text style={[styles.label, { color: config?.color }]}>{config?.label}</Text>
     </View>
   );
 };

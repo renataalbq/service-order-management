@@ -1,6 +1,6 @@
 import Realm from "realm";
-import { realm } from "../../../database/realm";
-import { WorkOrder } from "../types";
+import { realm } from "../../database/realm";
+import { WorkOrder } from "../../types";
 
 export function getWorkOrders(): WorkOrder[] {
   const results = realm

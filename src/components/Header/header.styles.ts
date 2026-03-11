@@ -24,11 +24,10 @@ export const useStyles = () => {
     left: {
       flexDirection: "row",
       alignItems: "center",
-      gap: 8,
     },
 
     backButton: {
-      paddingRight: 8,
+      marginRight: 8,
     },
 
     backText: {

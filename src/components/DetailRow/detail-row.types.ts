@@ -1,5 +1,5 @@
 export type IProps = {
-  iconName: string;
+  iconName: any;
   label: string;
   value: string;
 };

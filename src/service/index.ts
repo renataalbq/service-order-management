@@ -1,6 +1,6 @@
 import Realm from "realm";
-import { apiFetch } from "../../../api/client";
-import { realm } from "../../../database/realm";
+import { apiFetch } from "../api/client";
+import { realm } from "../database/realm";
 import { WorkOrder, SyncResponse } from "../types";
 import { LocalWorkOrder, SyncResult } from "./types";
 
@@ -34,19 +34,20 @@ async function pushChanges(errors: string[]): Promise<number> {
 
   for (const order of pending) {
     try {
-      const isDeleted = (order).deleted;
-      const isLocalOnly = (order).localOnly;
+      const isDeleted = (order as any).deleted;
+      const isLocalOnly = (order as any).localOnly;
 
       if (isDeleted && !isLocalOnly) {
         await apiFetch(`/work-orders/${order.id}`, { method: "DELETE" });
 
         realm.write(() => {
-          (order).needsSync = false;
-          (order).localOnly = false;
+          (order as any).needsSync = false;
         });
+
       } else if (isLocalOnly) {
         const plain = toPlain(order);
-        const { ...payload } = plain;
+
+        const { localOnly, needsSync, deleted, deletedAt, ...payload } = plain as any;
 
         const created = await apiFetch<WorkOrder>("/work-orders", {
           method: "POST",
@@ -54,12 +55,22 @@ async function pushChanges(errors: string[]): Promise<number> {
         });
 
         realm.write(() => {
+          const localObj = realm.objectForPrimaryKey("WorkOrder", order.id);
+          if (localObj) {
+            realm.delete(localObj);
+          }
           realm.create(
             "WorkOrder",
-            { ...toPlain(created), localOnly: false, needsSync: false },
+            {
+              ...toPlain(created),
+              id: String(created.id),
+              localOnly: false,
+              needsSync: false,
+            },
             Realm.UpdateMode.Modified
           );
         });
+
       } else {
         const serverOrder = await apiFetch<WorkOrder>(
           `/work-orders/${order.id}`
@@ -77,28 +88,28 @@ async function pushChanges(errors: string[]): Promise<number> {
                 Realm.UpdateMode.Modified
               );
             });
-            errors.push(
-              `Conflito: "${order.title}"`
-            );
+            errors.push(`Conflito: "${order.title}" — versão do servidor mantida`);
             continue;
           }
         }
 
-        const { ...payload } = order;
+        const payload = toPlain(order);
         await apiFetch(`/work-orders/${order.id}`, {
           method: "PUT",
           body: JSON.stringify(payload),
         });
+
         realm.write(() => {
-          (order).needsSync = false;
-          (order).localOnly = false;
+          (order as any).needsSync = false;
+          (order as any).localOnly = false;
         });
       }
 
       count++;
     } catch (err) {
       errors.push(
-        `Erro: "${order.title}": ${err instanceof Error ? err.message : String(err)
+        `Erro ao processar "${order.title}": ${
+          err instanceof Error ? err.message : String(err)
         }`
       );
     }
@@ -117,6 +128,14 @@ async function pullChanges(errors: string[]): Promise<number> {
 
     realm.write(() => {
       for (const order of data.created) {
+        const existing = realm.objectForPrimaryKey<WorkOrder>(
+          "WorkOrder",
+          String(order.id)
+        );
+        if (existing && !(existing as any).needsSync) {
+          continue;
+        }
+
         realm.create(
           "WorkOrder",
           { ...order, id: String(order.id), localOnly: false, needsSync: false },
@@ -130,11 +149,13 @@ async function pullChanges(errors: string[]): Promise<number> {
           "WorkOrder",
           String(order.id)
         );
-        if (local && local.needsSync) {
+
+        if (local && (local as any).needsSync) {
           const localTs = new Date(local.updatedAt).getTime();
           const serverTs = new Date(order.updatedAt).getTime();
           if (localTs >= serverTs) continue;
         }
+
         realm.create(
           "WorkOrder",
           { ...order, id: String(order.id), localOnly: false, needsSync: false },
@@ -147,8 +168,8 @@ async function pullChanges(errors: string[]): Promise<number> {
         const id = String(rawId);
         const item = realm.objectForPrimaryKey<WorkOrder>("WorkOrder", id);
         if (item) {
-          (item).deleted = true;
-          (item).needsSync = false;
+          (item as any).deleted = true;
+          (item as any).needsSync = false;
           count++;
         }
       }
@@ -157,7 +178,7 @@ async function pullChanges(errors: string[]): Promise<number> {
     lastSync = new Date().toISOString();
   } catch (err) {
     errors.push(
-      `Erro: ${err instanceof Error ? err.message : String(err)}`
+      `Erro ao receber dados: ${err instanceof Error ? err.message : String(err)}`
     );
   }
   return count;
@@ -172,7 +193,7 @@ function toPlain(obj: any): WorkOrder {
     assignedTo: obj.assignedTo,
     createdAt: obj.createdAt,
     updatedAt: obj.updatedAt,
-    deletedAt: obj.deletedAt,
+    deletedAt: obj.deletedAt ?? null,
     completed: obj.completed,
     deleted: obj.deleted,
   };
