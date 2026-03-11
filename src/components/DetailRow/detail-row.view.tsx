@@ -11,7 +11,6 @@ export const DetailRowView: React.FC<IProps> = (props) => {
   return (
     <View style={styles.row}>
       <Icon name='' size={24} color="#000" />
-      <Text style={styles.icon}>{iconName}</Text>
 
       <View style={styles.content}>
         <Text style={styles.label}>{label}</Text>

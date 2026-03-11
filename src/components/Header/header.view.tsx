@@ -27,11 +27,11 @@ export const HeaderView: React.FC<IProps> = (props) => {
 
       {onPressButton && (
         <TouchableOpacity style={styles.button} onPress={onPressButton}>
-          {/* <Icon
+          <Icon
             name={type === 'list' ? 'add' : 'edit'}
             size={24}
             color="#000"
-          /> */}
+          />
         </TouchableOpacity>
       )}
     </View>
