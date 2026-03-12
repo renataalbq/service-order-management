@@ -5,11 +5,11 @@ Aplicativo **offline-first** para gerenciamento de ordens de serviço. Permite c
 
 ## 🚀 Tecnologias
 
-| React Native (TypeScript)
-| Realm.js
-| Zustand
-| React Navigation
-| NetInfo
+- React Native (TypeScript)
+- Realm.js
+- Zustand
+- React Navigation
+- NetInfo
 
 ---
 
@@ -65,3 +65,9 @@ npx react-native run-ios
 npx react-native run-android
 ```
 ---
+
+<img width="200" height="400" alt="Simulator Screenshot - iPhone 16 - 2026-03-12 at 09 28 02" src="https://github.com/user-attachments/assets/f86b640a-d183-4725-9e48-8a27a4c73df9" />
+<img width="200" height="400" alt="Simulator Screenshot - iPhone 16 - 2026-03-12 at 09 28 17" src="https://github.com/user-attachments/assets/c62c3d03-b553-4a80-b183-39cf2c0d8dde" />
+<img width="200" height="400" alt="Simulator Screenshot - iPhone 16 - 2026-03-12 at 09 28 30" src="https://github.com/user-attachments/assets/52c32739-ba1b-4631-8cb1-1c98f0397eb8" />
+
+
