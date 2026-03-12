@@ -37,7 +37,13 @@ async function pushChanges(errors: string[]): Promise<number> {
       const isDeleted = (order as any).deleted;
       const isLocalOnly = (order as any).localOnly;
 
-      if (isDeleted && !isLocalOnly) {
+      if (isDeleted && isLocalOnly) {
+        realm.write(() => {
+          const localObj = realm.objectForPrimaryKey("WorkOrder", order.id);
+          if (localObj) realm.delete(localObj);
+        });
+
+      } else if (isDeleted && !isLocalOnly) {
         await apiFetch(`/work-orders/${order.id}`, { method: "DELETE" });
 
         realm.write(() => {
@@ -45,9 +51,11 @@ async function pushChanges(errors: string[]): Promise<number> {
         });
 
       } else if (isLocalOnly) {
-        const plain = toPlain(order);
-
-        const { ...payload } = plain as any;
+        const payload = {
+          title: order.title,
+          description: order.description,
+          assignedTo: order.assignedTo,
+        };
 
         const created = await apiFetch<WorkOrder>("/work-orders", {
           method: "POST",
