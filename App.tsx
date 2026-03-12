@@ -1,3 +1,4 @@
+import 'react-native-get-random-values';
 import React, { useEffect } from "react";
 import { StatusBar, useColorScheme } from "react-native";
 import { SafeAreaProvider } from "react-native-safe-area-context";
@@ -12,9 +13,9 @@ function App(): React.JSX.Element {
 
   useEffect(() => {
     loadOrders();
-    sync().catch(() => {});
+    sync().catch(() => { });
   }, []);
-  
+
   return (
     <SafeAreaProvider>
       <StatusBar

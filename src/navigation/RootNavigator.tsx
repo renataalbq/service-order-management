@@ -2,10 +2,9 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { RootStackParamList } from "./types";
-import { colors } from "../theme";
-import { WorkOrderForm } from "../screens/WorkOrderForm/work-order-form.controller";
-import { WorkOrderDetail } from "../screens/WorkOrderDetail/work-order-detail.controller";
-import { WorkOrderList } from "../screens/WorkOrdersList/work-order-list.controller";
+import { WorkOrderForm } from "../screens/WorkOrderForm";
+import { WorkOrderDetail } from "../screens/WorkOrderDetail";
+import { WorkOrderList } from "../screens/WorkOrdersList";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 

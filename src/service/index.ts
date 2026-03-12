@@ -47,7 +47,7 @@ async function pushChanges(errors: string[]): Promise<number> {
       } else if (isLocalOnly) {
         const plain = toPlain(order);
 
-        const { localOnly, needsSync, deleted, deletedAt, ...payload } = plain as any;
+        const { ...payload } = plain as any;
 
         const created = await apiFetch<WorkOrder>("/work-orders", {
           method: "POST",
@@ -108,8 +108,7 @@ async function pushChanges(errors: string[]): Promise<number> {
       count++;
     } catch (err) {
       errors.push(
-        `Erro ao processar "${order.title}": ${
-          err instanceof Error ? err.message : String(err)
+        `Erro ao processar "${order.title}": ${err instanceof Error ? err.message : String(err)
         }`
       );
     }

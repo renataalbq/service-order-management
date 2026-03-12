@@ -30,19 +30,12 @@ export const WorkOrderDetailView: React.FC<IProps> = (props) => {
       <Header
         title="Detalhes"
         type="detail"
-        onPressButton={() => navigation.navigate("WorkOrderForm")}
-        navigation={navigation}
+        onPressButton={() => navigation.navigate("WorkOrderForm", { id: order.id })}        navigation={navigation}
       />
-      <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+      <ScrollView style={styles.wrapper} contentContainerStyle={styles.content}>
         <View style={styles.card}>
           <View style={styles.cardHeader}>
             <StatusBadge status={order.status} />
-
-            {order.needsSync && (
-              <View style={styles.syncPill}>
-                <Text style={styles.syncPillText}>⏳ Aguardando sincronização</Text>
-              </View>
-            )}
           </View>
 
           <Text style={styles.title}>{order.title}</Text>
@@ -55,7 +48,7 @@ export const WorkOrderDetailView: React.FC<IProps> = (props) => {
 
         <View style={styles.row}>
           <DetailRow
-            iconName={''}
+            iconName={'person'}
             label="Responsável"
             value={order.assignedTo}
           />
@@ -63,7 +56,7 @@ export const WorkOrderDetailView: React.FC<IProps> = (props) => {
           <View style={styles.divider} />
 
           <DetailRow
-            iconName={''}
+            iconName={'calendar-month'}
             label="Criado em"
             value={formatDate(order.createdAt)}
           />
@@ -71,7 +64,7 @@ export const WorkOrderDetailView: React.FC<IProps> = (props) => {
           <View style={styles.divider} />
 
           <DetailRow
-            iconName={''}
+            iconName={'sync'}
             label="Atualizado em"
             value={formatDate(order.updatedAt)}
           />
@@ -81,7 +74,7 @@ export const WorkOrderDetailView: React.FC<IProps> = (props) => {
         </View>
 
         <TouchableOpacity style={styles.deleteBtn} onPress={onDelete}>
-          <Text style={styles.deleteBtnText}>🗑 Excluir ordem de serviço</Text>
+          <Text style={styles.deleteBtnText}>Excluir ordem de serviço</Text>
         </TouchableOpacity>
 
       </ScrollView>

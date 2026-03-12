@@ -5,7 +5,7 @@ export const STATUS: WorkOrderStatus[] = ["Pending", "In Progress", "Completed"]
 
 export const LABELS: Record<WorkOrderStatus, string> = {
   Pending: "Pendente",
-  "In Progress": "Em andamento",
+  "In Progress": "Em progresso",
   Completed: "Concluído",
 };
 

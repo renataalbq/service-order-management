@@ -29,27 +29,37 @@ export const createWorkOrdersSlice: StateCreator<WorkOrdersSlice> = (set) => ({
 
     set((state) => ({
       orders: [
-        ...state.orders,
         { ...order, localOnly: true, needsSync: true } as WorkOrder,
+        ...state.orders,
       ],
     }));
   },
 
   updateOrder: (id, data) => {
-    repository.updateWorkOrder(id, data);
-    set((state) => ({
-      orders: state.orders.map((order) =>
+    const updatedAt = now();
+    repository.updateWorkOrder(id, { ...data, updatedAt });
+
+    set((state) => {
+      const updated = state.orders.map((order) =>
         order.id === id
           ? {
               ...order,
               ...data,
               completed: (data.status ?? order.status) === "Completed",
-              updatedAt: now(),
+              updatedAt,
               needsSync: true,
             }
           : order
-      ),
-    }));
+      );
+
+      const idx = updated.findIndex((order) => order.id === id);
+      if (idx > 0) {
+        const [item] = updated.splice(idx, 1);
+        updated.unshift(item);
+      }
+
+      return { orders: updated };
+    });
   },
 
   deleteOrder: (id) => {

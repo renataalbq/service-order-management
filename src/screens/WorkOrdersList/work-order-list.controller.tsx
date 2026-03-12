@@ -32,11 +32,7 @@ export const WorkOrderList: React.FC = () => {
     setRefreshing(true);
 
     if (isOnline) {
-      const result = await sync();
-
-      if (result.errors.length) {
-        Alert.alert("Problemas na sincronização", result.errors.join("\n"));
-      }
+      await sync();
     } else {
       loadOrders();
     }
@@ -61,7 +57,7 @@ export const WorkOrderList: React.FC = () => {
         `${result.pushed} enviados - ${result.pulled} recebidos`
       );
     } else {
-      Alert.alert("Problemas na sincronização", result.errors.join("\n"));
+      console.warn("Problemas na sincronização", result.errors.join("\n"));
     }
   }, [isOnline, sync]);
 

@@ -1,27 +1,37 @@
 export const colors = {
-  primary: "#1D4ED8",
-  primaryLight: "#EFF6FF",
-  background: "#F8FAFC",
-  surface: "#FFFFFF",
-  border: "#E2E8F0",
-  text: "#0F172A",
-  textSecondary: "#64748B",
-  textMuted: "#94A3B8",
-  textInverse: "#FFFFFF",
+  primary: "#4A7C59",
+  primaryDark: "#3A6347",
+  primaryLight: "#EEF4F0",
+  primaryMid: "#C8DECE",
 
-  pending: "#D97706",
-  pendingBg: "#FEF3C7",
-  inProgress: "#2563EB",
-  inProgressBg: "#DBEAFE",
-  completed: "#16A34A",
-  completedBg: "#D1FAE5",
+  accent: "#C4653A",
+  accentDark: "#A5522E",
+  accentLight: "#FAF0EB",
+  accentMid: "#F0CBBA",
 
-  success: "#16A34A",
-  successLight: "#F0FDF4",
-  warning: "#D97706",
-  warningLight: "#FFFBEB",
-  error: "#DC2626",
-  errorLight: "#FEF2F2",
+  background: "#fbf8f3",
+  surface: "#FDFCFB",
+  border: "#E4DDD7",
+  borderStrong: "#CBBFB8",
+
+  text: "#2C2420",
+  textSecondary: "#6B5C55",
+  textMuted: "#A1908A",
+  textInverse: "#FDFCFB",
+
+  pending: "#9A6B20",
+  pendingBg: "#FDF4E3",
+  inProgress: "#4a697c",
+  inProgressBg: "#cbf2fd",
+  completed: "#4A7C59",
+  completedBg: "#E8F4F2",
+
+  success: "#4A7C59",
+  successLight: "#EEF4F0",
+  warning: "#9A6B20",
+  warningLight: "#FDF4E3",
+  error: "#C4653A",
+  errorLight: "#FAF0EB",
 };
 
 export const spacing = {
@@ -52,14 +62,14 @@ export const typography = {
 
 export const shadow = {
   sm: {
-    shadowColor: "#000",
+    shadowColor: "#4A7C59",
     shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.05,
-    shadowRadius: 3,
+    shadowOpacity: 0.07,
+    shadowRadius: 4,
     elevation: 2,
   },
   md: {
-    shadowColor: "#000",
+    shadowColor: "#2C2420",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.08,
     shadowRadius: 8,

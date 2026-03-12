@@ -18,7 +18,7 @@ export const HeaderView: React.FC<IProps> = (props) => {
             style={styles.backButton}
             onPress={() => navigation.goBack()}
           >
-            <Icon name="arrow-back" size={24} color="#000" />          
+            <Icon name={'arrow-back'} size={24} color="black" />     
           </TouchableOpacity>
         )}
 

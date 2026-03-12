@@ -3,7 +3,7 @@ import { IFilter } from "../work-order-list.types";
 export const FILTER_LABELS: Record<IFilter, string> = {
   All: "Todas",
   Pending: "Pendentes",
-  "In Progress": "Em andamento",
+  "In Progress": "Em progresso",
   Completed: "Concluídas",
 };
 

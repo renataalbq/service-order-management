@@ -23,7 +23,6 @@ export const WorkOrderListView: React.FC<IProps> = (props) => {
     filtered,
     filter,
     filters,
-    pendingCount,
     isOnline,
     isLoading,
     refreshing,
@@ -68,21 +67,13 @@ export const WorkOrderListView: React.FC<IProps> = (props) => {
           <Text style={styles.statusText}>
             {isOnline ? "Online" : "Offline"}
           </Text>
-
-          {pendingCount > 0 && (
-            <View style={styles.pendingBadge}>
-              <Text style={styles.pendingBadgeText}>
-                {pendingCount} pendentes
-              </Text>
-            </View>
-          )}
         </View>
 
         <TouchableOpacity style={styles.syncBtn} onPress={onManualSync}>
           {syncStatus === "syncing" ? (
             <ActivityIndicator size={12} color={colors.primary} />
           ) : (
-            <Text style={styles.syncBtnText}>↻ Sincronizar</Text>
+            <Text style={styles.syncBtnText}>Sincronizar</Text>
           )}
         </TouchableOpacity>
       </View>
@@ -126,7 +117,6 @@ export const WorkOrderListView: React.FC<IProps> = (props) => {
           }
           ListEmptyComponent={
             <View style={styles.empty}>
-              <Text style={styles.emptyIcon}>📋</Text>
 
               <Text style={styles.emptyTitle}>
                 {filter === "All"

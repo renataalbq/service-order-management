@@ -12,13 +12,15 @@ export const useStyles = () => {
       gap: spacing.sm,
       borderWidth: 1,
       borderColor: colors.border,
+      borderLeftWidth: 2,
+      borderLeftColor: colors.primaryMid,
       ...shadow.sm,
     },
 
-    header: { 
-      flexDirection: "row", 
-      justifyContent: "space-between", 
-      alignItems: "center" 
+    header: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      alignItems: "center",
     },
 
     pendingPill: {
@@ -28,20 +30,20 @@ export const useStyles = () => {
       paddingVertical: 3,
     },
 
-    pendingText: { 
-      ...typography.caption, 
-      color: colors.warning 
+    pendingText: {
+      ...typography.caption,
+      color: colors.warning,
     },
 
-    title: { 
-      ...typography.h4, 
-      color: colors.text 
+    title: {
+      ...typography.h4,
+      color: colors.text,
     },
 
-    description: { 
-      ...typography.small, 
-      color: colors.textSecondary, 
-      lineHeight: 19 
+    description: {
+      ...typography.small,
+      color: colors.textSecondary,
+      lineHeight: 19,
     },
 
     footer: {
@@ -54,35 +56,38 @@ export const useStyles = () => {
       marginTop: spacing.xs,
     },
 
-    assignee: { 
-      flexDirection: "row", 
-      alignItems: "center", 
-      gap: spacing.sm, flex: 1 
+    assignee: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.sm,
+      flex: 1,
     },
 
     avatar: {
-      width: 24,
-      height: 24,
-      borderRadius: 12,
+      width: 26,
+      height: 26,
+      borderRadius: 13,
       backgroundColor: colors.primaryLight,
+      borderWidth: 1.5,
+      borderColor: colors.primaryMid,
       alignItems: "center",
       justifyContent: "center",
     },
 
-    avatarLetter: { 
-      ...typography.label, 
-      color: colors.primary 
+    avatarLetter: {
+      ...typography.label,
+      color: colors.primary,
     },
 
-    assigneeName: { 
-      ...typography.small, 
-      color: colors.textSecondary, 
-      flex: 1 
+    assigneeName: {
+      ...typography.small,
+      color: colors.textSecondary,
+      flex: 1,
     },
 
-    time: { 
-      ...typography.caption, 
-      color: colors.textMuted 
+    time: {
+      ...typography.caption,
+      color: colors.textMuted,
     },
   });
 };

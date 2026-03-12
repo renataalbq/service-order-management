@@ -13,15 +13,10 @@ export const WorkOrderCardView: React.FC<IProps> = (props) => {
   return (
     <TouchableOpacity style={styles.card} onPress={onPress} activeOpacity={0.75}>
       <View style={styles.header}>
+        <Text style={styles.title} numberOfLines={2}>{item.title}</Text>
         <StatusBadge status={item.status} size="sm" />
-        {item.needsSync && (
-          <View style={styles.pendingPill}>
-            <Text style={styles.pendingText}>Pendentes de sync</Text>
-          </View>
-        )}
       </View>
 
-      <Text style={styles.title} numberOfLines={2}>{item.title}</Text>
       <Text style={styles.description} numberOfLines={2}>{item.description}</Text>
 
       <View style={styles.footer}>

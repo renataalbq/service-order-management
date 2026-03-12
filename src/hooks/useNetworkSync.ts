@@ -7,21 +7,40 @@ export function useNetworkSync() {
   const setOnline = useStore((s) => s.setOnline);
 
   const wasOffline = useRef(false);
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener((state) => {
+    NetInfo.fetch().then((state) => {
       const online =
         state.isConnected === true && state.isInternetReachable !== false;
-
       setOnline(online);
-
-      if (online && wasOffline.current) {
-        sync().catch(console.error);
-      }
-
       wasOffline.current = !online;
     });
 
-    return () => unsubscribe();
+    const unsubscribe = NetInfo.addEventListener((state) => {
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+
+      debounceRef.current = setTimeout(() => {
+        const online =
+          state.isConnected === true && state.isInternetReachable !== false;
+
+        setOnline(online);
+
+        if (online && wasOffline.current) {
+          sync().catch(console.error);
+        }
+
+        wasOffline.current = !online;
+      }, 300);
+    });
+
+    return () => {
+      unsubscribe();
+      if (debounceRef.current) {
+        clearTimeout(debounceRef.current);
+      }
+    };
   }, [sync, setOnline]);
 }

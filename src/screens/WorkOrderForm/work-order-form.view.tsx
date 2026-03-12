@@ -20,26 +20,26 @@ export const WorkOrderFormView: React.FC<IProps> = (props) => {
     isEditing,
     onChangeField,
     onSave,
-    navigation
+    navigation,
   } = props;
 
   const styles = useStyles();
 
   return (
     <SafeAreaView style={styles.container}>
-      <Header 
-        title={"Criar nova ordem de serviço"} 
-        navigation={navigation} 
+      <Header
+        title={isEditing ? "Editar ordem" : "Nova ordem de serviço"}
+        navigation={navigation}
       />
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}>
-
+        behavior={Platform.OS === "ios" ? "padding" : undefined}
+      >
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.content}
-          keyboardShouldPersistTaps="handled">
-
+          keyboardShouldPersistTaps="handled"
+        >
           <FormField
             label="Título"
             value={form.title}
@@ -73,23 +73,26 @@ export const WorkOrderFormView: React.FC<IProps> = (props) => {
             returnKeyType="done"
           />
 
-          <StatusPicker
-            value={form.status}
-            onChange={(status: WorkOrderStatus) => onChangeField("status", status)}
-          />
+          {isEditing && (
+            <StatusPicker
+              value={form.status}
+              onChange={(status: WorkOrderStatus) => onChangeField("status", status)}
+            />
+          )}
 
           <TouchableOpacity
             style={[styles.saveBtn, saving && styles.saveBtnDisabled]}
             onPress={onSave}
-            disabled={saving}>
-            {saving
-              ? <ActivityIndicator color={colors.textInverse} />
-              : <Text style={styles.saveBtnText}>
+            disabled={saving}
+          >
+            {saving ? (
+              <ActivityIndicator color={colors.textInverse} />
+            ) : (
+              <Text style={styles.saveBtnText}>
                 {isEditing ? "Salvar alterações" : "Criar ordem de serviço"}
               </Text>
-            }
+            )}
           </TouchableOpacity>
-
         </ScrollView>
       </KeyboardAvoidingView>
     </SafeAreaView>

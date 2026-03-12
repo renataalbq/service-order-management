@@ -3,14 +3,14 @@ import { colors, spacing, radius, typography } from "../../theme";
 
 export const useStyles = () => {
   return StyleSheet.create({
-    container: { 
-      gap: spacing.xs 
+    container: {
+      gap: spacing.xs,
     },
 
-    label: { 
-      ...typography.label, 
-      color: colors.textSecondary, 
-      letterSpacing: 0.8 
+    label: {
+      ...typography.label,
+      color: colors.primary,
+      letterSpacing: 0.8,
     },
 
     input: {
@@ -24,13 +24,13 @@ export const useStyles = () => {
       backgroundColor: colors.surface,
     },
 
-    inputError: { 
-      borderColor: colors.error 
+    inputError: {
+      borderColor: colors.accentMid,
     },
 
-    error: { 
-      ...typography.caption, 
-      color: colors.error 
+    error: {
+      ...typography.caption,
+      color: colors.error,
     },
   });
 };

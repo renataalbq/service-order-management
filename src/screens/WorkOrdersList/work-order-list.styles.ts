@@ -3,9 +3,14 @@ import { colors, radius, spacing, typography } from "../../theme";
 
 export const useStyles = () => {
   return StyleSheet.create({
-    container: { 
-      flex: 1, 
-      backgroundColor: colors.background 
+    container: {
+      flex: 1,
+      backgroundColor: colors.surface,
+    },
+
+    wrapper: {
+      flex: 1,
+      backgroundColor: colors.background,
     },
 
     statusBar: {
@@ -19,21 +24,21 @@ export const useStyles = () => {
       borderBottomColor: colors.border,
     },
 
-    statusLeft: { 
-      flexDirection: "row", 
-      alignItems: "center", 
-      gap: spacing.sm 
+    statusLeft: {
+      flexDirection: "row",
+      alignItems: "center",
+      gap: spacing.sm,
     },
 
-    dot: { 
-      width: 8, 
-      height: 8, 
-      borderRadius: 4 
+    dot: {
+      width: 8,
+      height: 8,
+      borderRadius: 4,
     },
 
-    statusText: { 
-      ...typography.small, 
-      color: colors.textSecondary 
+    statusText: {
+      ...typography.small,
+      color: colors.textSecondary,
     },
 
     pendingBadge: {
@@ -42,10 +47,10 @@ export const useStyles = () => {
       paddingHorizontal: 8,
       paddingVertical: 2,
     },
-    
-    pendingBadgeText: { 
-      ...typography.caption, 
-      color: colors.warning 
+
+    pendingBadgeText: {
+      ...typography.caption,
+      color: colors.warning,
     },
 
     syncBtn: {
@@ -54,13 +59,15 @@ export const useStyles = () => {
       gap: 4,
       paddingHorizontal: 12,
       paddingVertical: 6,
-      backgroundColor: colors.primaryLight,
+      backgroundColor: colors.accentLight,
       borderRadius: radius.full,
+      borderWidth: 1,
+      borderColor: colors.accentMid,
     },
 
-    syncBtnText: { 
-      ...typography.label, 
-      color: colors.primary 
+    syncBtnText: {
+      ...typography.label,
+      color: colors.accent,
     },
 
     lastSync: {
@@ -91,26 +98,25 @@ export const useStyles = () => {
       alignItems: "center",
     },
 
-    filterTabActive: { 
-      backgroundColor: colors.primary, 
-      borderColor: colors.primary 
+    filterTabActive: {
+      backgroundColor: colors.primaryLight,
+      borderColor: colors.primaryMid,
     },
 
-    filterTabText: { 
-      ...typography.caption, 
-      color: colors.textSecondary 
+    filterTabText: {
+      ...typography.caption,
+      color: colors.textSecondary,
     },
 
-    filterTabTextActive: { 
-      color: colors.textInverse, 
-      fontWeight: "600" as const 
+    filterTabTextActive: {
+      color: colors.primary,
+      fontWeight: "700" as const,
     },
 
-    loader: { 
-      flex: 1 
-    },
+    loader: { flex: 1 },
 
     listContent: { 
+      backgroundColor: colors.background, 
       paddingVertical: spacing.sm 
     },
 
@@ -123,15 +129,15 @@ export const useStyles = () => {
       padding: spacing.xl,
     },
 
-    emptyIcon: { 
-      fontSize: 44, 
-      marginBottom: spacing.sm 
+    emptyIcon: {
+      fontSize: 44,
+      marginBottom: spacing.sm,
     },
 
-    emptyTitle: { 
-      ...typography.h3, 
-      color: colors.text, 
-      textAlign: "center" 
+    emptyTitle: {
+      ...typography.h3,
+      color: colors.text,
+      textAlign: "center",
     },
 
     emptySubtitle: {
@@ -145,15 +151,15 @@ export const useStyles = () => {
       width: 32,
       height: 32,
       borderRadius: 16,
-      backgroundColor: colors.primary,
+      backgroundColor: colors.accentLight,
       alignItems: "center",
       justifyContent: "center",
     },
 
-    addBtnText: { 
-      color: colors.textInverse, 
-      fontSize: 22, 
-      lineHeight: 26 
+    addBtnText: {
+      color: colors.accent,
+      fontSize: 22,
+      lineHeight: 26,
     },
   });
 };

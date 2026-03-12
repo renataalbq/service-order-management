@@ -3,20 +3,20 @@ import { colors, spacing, radius, typography } from "../../theme";
 
 export const useStyles = () => {
   return StyleSheet.create({
-    container: { 
-      flex: 1, 
-      backgroundColor: colors.background 
+    container: {
+      flex: 1,
+      backgroundColor: colors.surface,
     },
 
-    content: { 
-      padding: spacing.md, 
-      gap: spacing.md, 
-      paddingBottom: 48 
+    content: {
+      padding: spacing.md,
+      gap: spacing.md,
+      paddingBottom: 48,
     },
 
-    textarea: { 
-      minHeight: 100, 
-      paddingTop: spacing.sm 
+    textarea: {
+      minHeight: 100,
+      paddingTop: spacing.sm,
     },
 
     saveBtn: {
@@ -27,10 +27,10 @@ export const useStyles = () => {
       marginTop: spacing.sm,
     },
 
-    saveBtnDisabled: { 
-      opacity: 0.65 
+    saveBtnDisabled: {
+      opacity: 0.55,
     },
-    
+
     saveBtnText: {
       ...typography.body,
       color: colors.textInverse,
